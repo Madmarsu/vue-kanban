@@ -6,14 +6,9 @@ var schema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String },
   created: { type: Number, default: Date.now() },
-  // Relations
-  // lists: [{ type: ObjectId, ref: models.list.name }],
-  userId: { type: ObjectId, ref: models.user.name, required: true }
+  boards: [{ type: ObjectId, ref: models.board }],
+  users: [{ type: ObjectId, ref: models.user }]
 });
 
-// schema.methods.getLists = function(next{
-//   Lists.find({boardId: this._id})
-// })
 
-
-module.exports = mongoose.model(models.board.name, schema);
+module.exports = mongoose.model(models.team.name, schema);

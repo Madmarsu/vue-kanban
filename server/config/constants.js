@@ -7,8 +7,33 @@ const actions = {
 }
 
 const models = {
-  board: 'Board',
-  list: 'List'
+  board: {
+    name: 'Board',
+    endpoint: 'boards',
+    useCustomRoutes: true
+  },
+  list: {
+    name: 'List',
+    endpoint: 'lists'
+  },
+  user: {
+    name: 'User',
+    endpoint: 'users',
+    preventDefaultApi: true,
+    useCustomRoutes: true
+  },
+  task: {
+    name: 'Task',
+    endpoint: 'tasks'
+  },
+  comment: {
+    name: 'Comment',
+    endpoint: 'comments'
+  },
+  team: {
+    name: 'Team',
+    endpoint: 'teams'
+  }
 }
 
 

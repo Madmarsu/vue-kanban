@@ -1,27 +1,28 @@
-// LOCAL DEV VARIABLES
+ // LOCAL DEV VARIBLES
 let env = {
-	NODE_ENV: 'development',
-	PORT: 3000,
-	DBPROTOCOL: 'mongodb',
-	DBUSERNAME: 'student',
-	DBPASSWORD: 'CodeWorksStudent',
-	DBHOST: 'ds056789.mlab.com:56789',
-	DBNAME: 'codeworks',
-	SERVERNAME: 'dev-server'
+    NODE_ENV: 'development',
+    PORT: 3001,
+    DBPROTOCOL: 'mongodb',
+    DBUSERNAME: 'kanbanuser',
+    DBPASSWORD: 'sandbox',
+    DBHOST: 'ds056979.mlab.com:56979',
+    DBNAME: 'kanbanproject',
+    SERVERNAME: 'dev-server'
 }
 
 // MAPS env TO ACTUAL ENVIRONMENT
-if (process.env.NODE_ENV == 'development') {
-	Object.keys(env).forEach(v => {
-		env[v] = process.env[v] || env[v]
-	})
+if(process.env.NODE_ENV == 'development'){
+    Object.keys(env).forEach(v => {
+        process.env[v] = env[v]
+    })
 } else {
-	Object.keys(env).forEach(v => {
-		process.env[v] = env[v]
-	})
+    Object.keys(env).forEach(v => {
+        env[v] = process.env[v] || env[v]
+        process.env[v] = env[v]
+    })
 }
 
-// MongoDb Connection String Builder
+// MongoDB Connection String Builder
 env.CONNECTIONSTRING = `${env.DBPROTOCOL}://${env.DBUSERNAME}:${env.DBPASSWORD}@${env.DBHOST}/${env.DBNAME}`
 process.env.CONNECTIONSTRING = env.CONNECTIONSTRING
 

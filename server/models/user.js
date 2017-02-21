@@ -3,14 +3,20 @@ let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 let bcrypt = require('bcryptjs')
 const SALT_FACTOR = 10
+import { models } from '../config/constants'
 
 let schema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true, dropDups: true },
   password: { type: String, required: true },
-  created: { type: Number, required: true, default: Date.now() }
+  created: { type: Number, required: true, default: Date.now() },
+  // Relations
+  // boards: [{ type: ObjectId, ref: models.board }],
+  // lists: [{ type: ObjectId, ref: models.list }],
+  // tasks: [{ type: ObjectId, ref: models.task }],
+  // comments: [{ type: ObjectId, ref: models.comment }],
+  // teams: [{ type: ObjectId, ref: models.team }]
 })
-
 
 schema.pre('save', function (next) {
   var user = this;
@@ -40,7 +46,7 @@ schema.methods.validatePassword = function (password) {
   })
 };
 
-schema.preventDefaultApi = true
 
 
-module.exports = mongoose.model('User', schema)
+
+module.exports = mongoose.model(models.user.name, schema)

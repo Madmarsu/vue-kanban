@@ -4,9 +4,6 @@
   "description": "The server for vue-kanban",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "debug-15": "node --debug index.js",
-    "start-15": "node index.js",
     "debug": "babel-node --presets es2015 --debug index.js",
     "start": "babel-node --presets es2015 index.js"
   },

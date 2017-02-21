@@ -8,13 +8,17 @@ var schema = new mongoose.Schema({
 	description: { type: String },
 	created: { type: Number, default: Date.now() },
 	// Relations
+	listId: { type: ObjectId, ref: models.list.name, required: true },
 	boardId: { type: ObjectId, ref: models.board.name, required: true },
-	// tasks: [{ type: ObjectId, ref: models.task }],
+	// comments: [{ type: ObjectId, ref: models.comment }],
 	userId: { type: ObjectId, ref: models.user.name, required: true }
 });
 
 // schema.post('save', function(){
-	
+// 	Lists.findById(this.listId)
+// 		.then(list => {
+
+// 		})
 // })
 
-module.exports = mongoose.model(models.list.name, schema);
+module.exports = mongoose.model(models.task.name, schema);
