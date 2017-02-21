@@ -28,6 +28,25 @@ export default {
                 return next(handleResponse(action, null, error))
             })
       }
+  },
+  tasksAndLists: {
+    path: '/boards/:id/data',
+    reqType: 'get',
+    method(req, res, next){
+      let action = 'Find Tasks by Board'
+      let data = {}
+      Tasks.find({boardId: req.params.id})
+        .then(tasks => {
+          data.tasks = tasks
+          Lists.find({boardId: req.params.id})
+            .then(lists => {
+              data.lists = lists
+              res.send(handleResponse(action, data))
+            }).catch(error => {
+              return next(handleResponse(action, null, error))
+            })
+        })
+    }
   }
 }
 
