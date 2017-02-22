@@ -10,14 +10,25 @@
 // import
 
 export default {
-    name: '',
+    name: 'tasks',
     data () {
         return {
 
         }
     },
     methods: {
+            getTasks: function () {
 
+            },
+            createTask: function () {
+
+            },
+            modifyTask: function () {
+
+            },
+            recycleTask: function () {
+
+            }
     },
 
 }

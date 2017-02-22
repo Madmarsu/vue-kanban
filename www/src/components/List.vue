@@ -1,26 +1,42 @@
 <template>
+    <div>
+        <!--<h1>{{list.name}}</h1>
+              <div v-for="list in lists">
+               {{list.title}}
+              </div>-->
 
+    </div>
 
 </template>
 
 
 <script>
+    // import
+    // import
 
-// import
-// import
+    export default {
+        name: 'list',
+        data() {
+            return {
 
-export default {
-    name: '',
-    data () {
-        return {
+            }
+        },
+        methods: {
+            getLists: function () {
 
-        }
-    },
-    methods: {
+            },
+            createList: function () {
 
-    },
+            },
+            modifyList: function () {
 
-}
+            },
+            recycleList: function () {
+
+            }
+        },
+
+    }
 
 </script>
 

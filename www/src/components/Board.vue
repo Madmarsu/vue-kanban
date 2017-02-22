@@ -1,26 +1,43 @@
 <template>
+    <div>
+        <!--<h1>{{board.name}}</h1>
+              <div v-for="board in boards">
+               {{board.title}}
+              </div>-->
 
+    </div>
 
 </template>
 
 
 <script>
+    // import
+    // import
 
-// import
-// import
+    export default {
+        name: 'board',
+        data() {
+            return {
 
-export default {
-    name: '',
-    data () {
-        return {
+            }
+        },
+        methods: {
+            getUserBoards: function () {
 
-        }
-    },
-    methods: {
+            },
+            createUserBoard: function () {
 
-    },
+            },
+            modifyUserBoard: function () {
 
-}
+            },
+            recycleUserBoard: function () {
+
+            }
+
+        },
+
+    }
 
 </script>
 

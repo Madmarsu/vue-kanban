@@ -1,26 +1,50 @@
 <template>
-
+    <div class="panel panel-default">
+        <div v-for="comment in comments">
+            <div class="panel-body">
+                {{comment.body}}
+            </div>
+        </div>
+    </div>
+    <div>
+        <form @submit.prevent="something">
+            <button type="submit">Comment</button>
+            <textarea class="form-control" rows="2" v-model="body"></textarea>
+        </form>
+    </div>
 
 </template>
 
 
 <script>
+    // import
+    // import
 
-// import
-// import
+    export default {
+        name: 'comments',
+        data() {
+            return {
+                comments: [],
+                questionId: '',
+                body: ''
+            }
+        },
+        methods: {
+            getComments: function () {
 
-export default {
-    name: '',
-    data () {
-        return {
+            },
+            createComment: function () {
 
-        }
-    },
-    methods: {
+            },
+            modifyComment: function () {
 
-    },
+            },
+            recycleComment: function () {
 
-}
+            }
+        },
+
+    }
 
 </script>
 
