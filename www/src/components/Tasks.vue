@@ -6,11 +6,13 @@
 
 <script>
 
-// import
+import Comments from './Comments'
 // import
 
 export default {
     name: 'tasks',
+    components: { Comments },
+
     data () {
         return {
 
