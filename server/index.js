@@ -1,6 +1,7 @@
 import server from './config/dev-server'
 
 let mongoose = require('mongoose')
+mongoose.Promise = global.Promise;
 let connection = mongoose.connection;
 
 
