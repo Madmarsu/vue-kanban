@@ -49,6 +49,7 @@ function create(req, res, next) {
   var action = actions.create
 
   let model = new schema(req.body)
+  model.userId = req.session.uid
 
   model.save()
     .then(data => {

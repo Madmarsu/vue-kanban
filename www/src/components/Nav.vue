@@ -1,47 +1,43 @@
 <template>
-    <div class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-                <a class="navbar-brand" href="#">Kanban Board!!</a>
-            </div>
-            <center>
-                <div class="navbar-collapse collapse" id="navbar-main">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/">Home</a>
-                        </li>
-                        <li><a href="/#/questions">Ask a question</a>
-                        </li>
-                        <li v-if="loggedin"><a href="#">Logged in as: {{user.email}}</a>
-                        </li>
+    <nav class="blue darken-4" role="navigation">
+        <div class="nav-wrapper">
+            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <ul v-if="!user._id" class="right hide-on-med-and-down">
+                <li>
+                    <router-link to="/login">Login</router-link>
+                </li>
+                <li>
+                    <router-link to="/register">Register</router-link>
+                </li>
+            </ul>
+            <ul v-if="user._id" class="right hide-on-med-and-down">
+                <li>
+                    Welcome, {{ user.name }}!
+                </li>
+                <li>
+                    <a @click="logout">Logout</a>
+                </li>
+            </ul>
 
-                    </ul>
-                    <div v-if="!loggedin">
-                        <form class="navbar-form navbar-right" role="search" @submit.prevent="logUserIn">
-                            <div class="form-group">
-                                <input type="email" class="form-control" name="username" placeholder="email" v-model="email" required>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="Password" v-model="password" required>
-                            </div>
-                            <button type="submit" class="btn btn-default">Sign In</button>
-                        </form>
-
-                    </div>
-                    <div v-else>
-                        <ul class="nav navbar-nav">
-                            <li><a @click="logMeOut" href="/">Log Out</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </center>
+            <ul id="nav-mobile" class="side-nav">
+                <li>
+                    <router-link to="/login">Login</router-link>
+                </li>
+                <li>
+                    <router-link to="/register">Register</router-link>
+                </li>
+            </ul>
+            <!--<ul v-if="this.$root.user._id" id="nav-mobile" class="side-nav">
+            <li>
+                Welcome, {{ this.$root.user.name }}!
+            </li>
+            <li>
+                Logout
+            </li>
+        </ul>-->
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
-    </div>
+    </nav>
 
 </template>
 
@@ -52,38 +48,16 @@
 
     export default {
         name: 'nav',
-        data() {
-            return {
-                // login: {},
-                // searchBar: 'link search component',
-                // email: '',
-                // password: '',
-                // username: '',
-                // loggedin: false
+        computed: {
+            user(){
+                return this.$root.$data.store.state.user
             }
         },
-        // mounted() {
-        //     this.$root.$data.store.actions.getAuthentication().then(res => {
-        //         this.loggedin = true
-        //         this.user = res.data.data
-        //     })
-        // },
-        // methods: {
-        //     logUserIn: function () {
-        //         this.$root.$data.store.actions.loginUser(this.email, this.password).then(response => {
-        //             this.user = response.data.data
-        //             this.loggedin = true
-        //             console.log(response)
-        //         }).catch(err => {
-        //             console.log(err)
-        //         })
-        //     },
-        //     logMeOut: function () {
-        //         this.$root.$data.store.actions.loginUser(this.email, this.password).then(response => {
-        //             console.log(response)
-        //         })
-        //     }
-        // }
+        methods: {
+            logout(){
+                this.$root.$data.store.actions.logout();
+            }
+        }
 
     }
 

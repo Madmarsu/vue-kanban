@@ -4,6 +4,9 @@ function userboardService(){
         $.get('/api/userboards', userId, function(data){
             return data
         })
+        $.get('/api/sharedBoards', userId, function(data){
+            return data
+        })
     }
 
     this.login = function(email, password){

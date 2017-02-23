@@ -1,13 +1,20 @@
 <template>
   <div id="app">
-    <!--<nav-view></nav-view>-->
+    <navbar></navbar>
+    <error></error>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Navbar from './components/Nav'
+import Error from './components/Error'
   export default {
-    name: 'app'
+    name: 'app',
+    components: {
+      Navbar,
+      Error
+    }
   }
 
 </script>
@@ -19,6 +26,5 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
 </style>

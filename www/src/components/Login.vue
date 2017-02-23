@@ -1,32 +1,37 @@
 <template>
     <div class="spacer">
-
-        <h1 class="text-center"> Login </h1>
-
-        <form class="form-horizontal" @submit.prevent="login">
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
-                <div class="col-sm-6">
-                    <input type="text" class="form-control" v-model="username" id="inputEmail3" placeholder="Email">
-                </div>
+        <h1 class="center-align"> Login </h1>
+        <div class="container">
+            <div class="row">
+                <form @submit.prevent="loginUser" class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input type="email" id="email" v-model="email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="col s6">
+                            <div class="col s11 input-field">
+                                <input v-if="!showPass" type="password" id="password" v-model="password" required>
+                                <input v-if="showPass" type="text" id="password" v-model="password" required>
+                                <label for="password">Password</label>
+                            </div>
+                            <div class="col s1 input-field">
+                                <a @click="toggleShowPass" class="btn-floating hoverable red"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+                        <div class="col s12 center">
+                            <button type="submit" class="waves-effect waves-light btn">Login</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-                <div class="col-sm-6">
-                    <input type="password" class="form-control" id="inputPassword3" v-model="password" placeholder="Password">
-                </div>
-            </div>
-            <div class="col-sm-8">
-                <button type="submit" class="btn btn-large btn-default" style="float:right;">sign in</button>
-            </div>
-        </form>
-    </div>
+        </div>
 
 </template>
 
 
 <script>
-    // import
+    import userboardService from '../services/userboard-service'
     // import
 
     export default {
@@ -36,14 +41,21 @@
                 // Need to review
                 // registrationMessage: '',
                 // username: '',
-                // email: '',
-                // password: '',
+                email: '',
+                password: '',
+                showPass: false
                 // user: {}
             }
         },
         methods: {
             loginUser: function () {
-
+                this.$root.$data.store.actions.login(this.email, this.password);
+                this.email = '';
+                this.password = '';
+                this.$router.push({path: '/'})
+            },
+            toggleShowPass: function () {
+                this.showPass = !this.showPass
             }
 
 

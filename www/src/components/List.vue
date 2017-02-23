@@ -1,9 +1,18 @@
 <template>
     <div>
-        <!--<h1>{{list.name}}</h1>
-              <div v-for="list in lists">
-               {{list.title}}
-              </div>-->
+        <div class="col s3">
+            <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                    <span class="card-title">{{ list.name }}</span>
+                    <p>{{ list.description }}</p>
+                    <div class="card-content blue-grey lighten-1" style="border-radius: 10%">
+                        <div v-for="task in tasks" class="left-align">
+                            <task v-if="task.listId == list.id" :task="task"></task>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -11,12 +20,13 @@
 
 
 <script>
-    import Tasks from './Tasks'
+    import Task from './Tasks'
     // import
 
     export default {
         name: 'list',
-        components: { Tasks },
+        components: { Task },
+        props: ['list', 'tasks'],
         data() {
             return {
 

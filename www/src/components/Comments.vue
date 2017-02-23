@@ -5,12 +5,12 @@
                 {{comment.body}}
             </div>
         </div>
-    </div>
     <div>
         <form @submit.prevent="something">
             <button type="submit">Comment</button>
             <textarea class="form-control" rows="2" v-model="body"></textarea>
         </form>
+    </div>
     </div>
 
 </template>

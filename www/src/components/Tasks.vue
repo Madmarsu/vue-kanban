@@ -1,5 +1,6 @@
 <template>
 
+    <p><strong>{{ task.name }}</strong> - {{ task.description }}</p>
 
 </template>
 
@@ -12,6 +13,7 @@ import Comments from './Comments'
 export default {
     name: 'tasks',
     components: { Comments },
+    props: ['task'],
 
     data () {
         return {

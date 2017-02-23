@@ -4,6 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import io from 'socket.io-client'
+import store from './store'
+
+
 
 let socket = io('http://localhost:3001')
 socket.on('CONNECTED', function(data){
@@ -14,6 +17,9 @@ socket.on('CONNECTED', function(data){
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: {
+    store
+  },
   router,
   template: '<App/>',
   components: { App }
