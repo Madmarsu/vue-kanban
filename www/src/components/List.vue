@@ -11,11 +11,12 @@
 
 
 <script>
-    // import
+    import Tasks from './Tasks'
     // import
 
     export default {
         name: 'list',
+        components: { Tasks },
         data() {
             return {
 

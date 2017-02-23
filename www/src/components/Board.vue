@@ -11,11 +11,12 @@
 
 
 <script>
-    // import
+  import Lists from './List'
     // import
 
     export default {
         name: 'board',
+        components: { Lists },
         data() {
             return {
 
