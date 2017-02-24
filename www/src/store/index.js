@@ -124,6 +124,13 @@ export default {
                 })
                 .catch(handleError)
         },
+        editTask(task, taskId, boardId){
+            api.put('tasks/' + taskId, task)
+                .then(res => {
+                    this.getTasksandLists(boardId)
+                })
+                .catch(handleError)
+        },
         droppedTask(task, newListId, boardId){
             api.put('tasks/' + task._id, { listId: newListId })
                 .then(res => {
