@@ -67,6 +67,7 @@ export default {
         getTasksandLists(id){
             api('boards/' + id + '/data')
                 .then(res => {
+                    console.log(res.data.data)
                     state.activeLists = res.data.data.lists
                     state.activeTasks = res.data.data.tasks
                 })
@@ -117,7 +118,7 @@ export default {
         logout(){
             api.delete('http://localhost:3001/logout')
                 .then(res => {
-                    state.user = '';
+                    state.user = {};
                     Materialize.toast(res.data.message, 2000);
                 })
                 .catch(handleError)
