@@ -4,12 +4,30 @@
               <div v-for="board in boards">
                {{board.title}}
               </div>-->
-    <div class="row">
-        <h3>{{ board.name }}</h3>
-        <div v-for="list in lists">
-            <list :list="list" :tasks="tasks"></list>
+        <div class="row">
+            <h3>{{ board.name }}</h3>
+
+            <button v-if="!showListForm" @click="triggerListForm" class="waves-effect waves-light btn">Add List</button>
+            <div class="container" v-if="showListForm">
+                <h4>Add a List</h4>
+                <form class="row" @submit.prevent="addList">
+                    <div class="col s12 input-field">
+                        <input type="text" id="listName" v-model="listName" required>
+                        <label for="listName">Title</label>
+                    </div>
+                    <div class="col s12 input-field">
+                        <textarea class="materialize-textarea" id="listDesc" cols="30" rows="10" v-model="listDesc"></textarea>
+                        <label for="listDesc">Description</label>
+                    </div>
+                    <button class="waves-effect waves-teal btn" type="submit">Add List</button>
+                    <button @click="triggerListForm" class="waves-effect waves-teal btn-flat"><i class="fa fa-times"></i></button>
+                </form>
+            </div>
+
+            <div v-for="list in lists">
+                <list :list="list" :tasks="tasks"></list>
+            </div>
         </div>
-    </div>
 
     </div>
 
@@ -17,17 +35,24 @@
 
 
 <script>
-  import List from './List'
+    import List from './List'
     // import
 
     export default {
         name: 'board',
         components: { List },
-        mounted(){
+        data() {
+            return {
+                listName: '',
+                listDesc: '',
+                showListForm: false
+            }
+        },
+        mounted() {
             this.$root.$data.store.actions.getBoard(this.$route.params.id)
         },
         computed: {
-            board(){
+            board() {
                 return this.$root.$data.store.state.activeBoard
             },
             lists() {
@@ -35,6 +60,21 @@
             },
             tasks() {
                 return this.$root.$data.store.state.activeTasks
+            }
+        },
+        methods: {
+            addList: function () {
+                this.$root.$data.store.actions.createList({
+                    name: this.listName,
+                    description: this.listDesc,
+                    boardId: this.$route.params.id
+                }, this.$route.params.id)
+                this.showListForm = false
+                this.listName = ''
+                this.listDesc = ''
+            },
+            triggerListForm: function(){
+                this.showListForm = !this.showListForm
             }
         }
     }
