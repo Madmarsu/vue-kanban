@@ -56,6 +56,7 @@
         methods: {
             logout(){
                 this.$root.$data.store.actions.logout();
+                this.$router.push({path: '/'})
             }
         }
 

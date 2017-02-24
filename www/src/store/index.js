@@ -86,6 +86,16 @@ export default {
                 })
                 .catch(handleError)
         },
+        addCollab(email, boardId){
+            api.post('boards/' + boardId + '/invite', email)
+                .then(res => {
+                    if(res.data.data.collaborators){
+                        Materialize.toast('User added to board', 2000)
+                    }
+                    this.getSharedBoards()
+                })
+                .catch(handleError)
+        },
         createList(list, boardId){
             api.post('lists', list)
                 .then(res => {

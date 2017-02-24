@@ -1,13 +1,11 @@
 <template>
     <div>
-        <!--<h1>{{board.name}}</h1>
-              <div v-for="board in boards">
-               {{board.title}}
-              </div>-->
         <div class="row">
             <h3>{{ board.name }}</h3>
 
             <button v-if="!showListForm" @click="triggerListForm" class="waves-effect waves-light btn">Add List</button>
+            <button @click="triggerInviteForm" class="waves-effect waves-light btn" v-if="!showListForm && !showInviteForm">Add Collaborators</button>
+
             <div class="container" v-if="showListForm">
                 <h4>Add a List</h4>
                 <form class="row" @submit.prevent="addList">
@@ -21,6 +19,18 @@
                     </div>
                     <button class="waves-effect waves-teal btn" type="submit">Add List</button>
                     <button @click="triggerListForm" class="waves-effect waves-teal btn-flat"><i class="fa fa-times"></i></button>
+                </form>
+            </div>
+
+            <div class="container" v-if="showInviteForm">
+                <h4>Add a Collaborator</h4>
+                <form class="row" @submit.prevent="inviteUser">
+                    <div class="col s12 input-field">
+                        <input type="text" id="inviteEmail" v-model="inviteEmail" required>
+                        <label for="inviteEmail">Collaborator E-mail</label>
+                    </div>
+                    <button type="submit" class="waves-effect waves-teal btn">Invite User</button>
+                    <button @click="triggerInviteForm" class="waves-effect waves-teal btn-flat"><i class="fa fa-times"></i></button>
                 </form>
             </div>
 
@@ -45,7 +55,9 @@
             return {
                 listName: '',
                 listDesc: '',
-                showListForm: false
+                showListForm: false,
+                inviteEmail: '',
+                showInviteForm: false
             }
         },
         mounted() {
@@ -75,8 +87,22 @@
             },
             triggerListForm: function(){
                 this.showListForm = !this.showListForm
+                this.showInviteForm = false
                 this.listName = ''
                 this.listDesc = ''
+            },
+            triggerInviteForm: function(){
+                this.showInviteForm = !this.showInviteForm
+                this.showListForm = false
+                this.inviteEmail = ''
+            },
+            inviteUser: function(){
+                this.$root.$data.store.actions.addCollab({
+                    email: this.inviteEmail
+                }, this.$route.params.id)
+                this.showListForm = false
+                this.showInviteForm = false
+                this.inviteEmail = ''
             }
         }
     }
