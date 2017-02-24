@@ -40,6 +40,9 @@ export default {
                 })
                 .catch(handleError)
         },
+        getUserBoards(){
+
+        },
         getBoard(id){
             api('boards/' + id)
                 .then(res => {
@@ -71,6 +74,7 @@ export default {
                     if(res.data.data){
                         state.user = res.data.data
                         this.getUserBoards()
+                        this.getSharedBoards()
                     } else {
                         state.error = res.data.error
                         Materialize.toast(res.data.error, 1000);
