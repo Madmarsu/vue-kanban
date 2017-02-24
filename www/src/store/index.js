@@ -9,8 +9,11 @@ let api = axios.create({
 
 // REGISTER ALL DATA HERE
 let state = {
-    boards: [],
+    userBoards: [],
+    sharedBoards: [],
     activeBoard: {},
+    activeLists: [],
+    activeTasks: [],
     error: {},
     user: {}
 
@@ -41,26 +44,44 @@ export default {
                 .catch(handleError)
         },
         getUserBoards(){
-
+            api('userboards')
+                .then(res => {
+                    state.userBoards = res.data.data
+                })
+                .catch(handleError)
+        },
+        getSharedBoards(){
+            api('sharedboards')
+                .then(res => {
+                    state.sharedBoards = res.data.data
+                })
         },
         getBoard(id){
             api('boards/' + id)
                 .then(res => {
                     state.activeBoard = res.data.data
+                    this.getTasksandLists(id)
                 })
                 .catch(handleError)
+        },
+        getTasksandLists(id){
+            api('boards/' + id + '/data')
+                .then(res => {
+                    state.activeLists = res.data.data.lists
+                    state.activeTasks = res.data.data.tasks
+                })
         },
         createBoard(board){
             api.post('boards', board)
                 .then(res => {
-                    this.getBoards()
+                    this.getUserBoards()
                 })
                 .catch(handleError)
         },
         removeBoard(board){
             api.delete('boards/' + board._id)
                 .then(res => {
-                    this.getBoards()
+                    this.getUserBoards()
                 })
                 .catch(handleError)
         },

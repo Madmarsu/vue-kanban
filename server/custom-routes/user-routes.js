@@ -17,10 +17,11 @@ export default {
     }
   },
   sharedBoards: {
-    path: '/sharedBoards',
+    path: '/sharedboards',
     reqType: 'get',
     method(req, res, next){
-      Boards.find({collaborators: { $in: req.session.uid}})
+      let action = 'Find Shared Boards'
+      Boards.find({collaborators: { $in: [req.session.uid]}})
         .then(boards => {
           res.send(handleResponse(action, boards))
         }).catch(error => {

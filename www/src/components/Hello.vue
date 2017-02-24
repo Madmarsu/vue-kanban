@@ -19,11 +19,11 @@
       </div>
     </div>
 
-    <!--<div>
+    <div v-if="this.$root.$data.store.state.user._id">
       <h3>Your Boards</h3>
       <div class="row">
         <div v-for="userboard in userboards" class="col s12 m3">
-          <router-link :to="'/boards/' + userboard.id" @click="getBoard(userboard.id)">
+          <router-link :to="'/boards/' + userboard._id" @click="getBoard(userboard._id)">
             <div class="card hoverable blue-grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title">{{ userboard.name }}</span>
@@ -32,12 +32,12 @@
             </div>
           </router-link>
         </div>
-      </div>-->
+      </div>
     <!-- USER AND SHARED BOARDS -->
-    <!--<h3>Shared Boards</h3>
+    <h3>Shared Boards</h3>
       <div class="row">
         <div v-for="sharedboard in sharedBoards" class="col s12 m3">
-          <router-link :to="'/boards/' + sharedboard.id" @click="getBoard(sharedboard.id)">
+          <router-link :to="'/boards/' + sharedboard._id" @click="getBoard(sharedboard._id)">
             <div class="card hoverable blue-grey darken-1">
               <div class="card-content white-text">
                 <span class="card-title">{{ sharedboard.name }}</span>
@@ -47,12 +47,11 @@
           </router-link>
         </div>
       </div>
-    </div>-->
+    </div>
 
 
 
-    <div v-if="this.$root.$data.store.state.user._id">
-
+    <!--<div v-if="this.$root.$data.store.state.user._id">
       <h3 class="center-aligned white-text">Boards</h3>
       <button @click="addBoard">Add Board</button>
       <div class="row container">
@@ -70,8 +69,7 @@
           </div>
         </div>
       </div>
-
-    </div>
+    </div>-->
 
   </div>
 
@@ -81,33 +79,12 @@
 <script>
   export default {
     name: 'hello',
-    // data() {
-    //   return {
-    //     msg: 'Welcome to Your Kanban Web App',
-    //     userboards: [{
-    //       name: 'Jaime\'s Board',
-    //       description: 'have to stay on task.......',
-    //       created: Date.now(),
-    //       id: 1
-    //     }, {
-    //       name: 'Dave\'s Board',
-    //       description: 'SCRUM MASTER',
-    //       created: Date.now(),
-    //       id: 2
-    //     }],
-    //     sharedBoards: [{
-    //       name: 'Jason and Justin',
-    //       description: 'they sit next to us',
-    //       created: Date.now()
-    //     }]
-    //   }
-    // },
-    mounted() {
-      this.$root.$data.store.actions.getBoards()
-    },
     computed: {
-      boards() {
-        return this.$root.$data.store.state.boards
+      userboards() {
+        return this.$root.$data.store.state.userBoards
+      },
+      sharedBoards(){
+        return this.$root.$data.store.state.sharedBoards
       }
     },
     methods: {
