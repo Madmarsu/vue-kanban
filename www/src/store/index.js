@@ -107,6 +107,13 @@ export default {
                 })
                 .catch(handleError)
         },
+        removeTask(task, boardId){
+            api.delete('tasks/' + task._id)
+                .then(res => {
+                    this.getTasksandLists(boardId)
+                })
+                .catch(handleError)
+        },
         login(userEmail, userPassword){
             api.post('http://192.168.0.6:3001/login', {
                 email: userEmail,
