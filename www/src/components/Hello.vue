@@ -21,6 +21,15 @@
 
     <div v-if="this.$root.$data.store.state.user._id">
       <h3>Your Boards</h3>
+      <button v-if="!showBoardForm" @click="triggerBoardForm" class="waves-effect waves-light btn">Add Board</button>
+      <div v-if="showBoardForm">
+          <h4>Add a Board</h4>
+          <form @submit.prevent="addBoard">
+            <input type="text" v-model="boardName">
+            <textarea cols="30" rows="10" v-model="boardDesc"></textarea>
+            <button type="submit">Add Board</button>
+          </form>
+      </div>
       <div class="row">
         <div v-for="userboard in userboards" class="col s12 m3">
           <router-link :to="'/boards/' + userboard._id" @click="getBoard(userboard._id)">
@@ -79,6 +88,13 @@
 <script>
   export default {
     name: 'hello',
+    data(){
+      return {
+        boardName: '',
+        boardDesc: '',
+        showBoardForm: false
+      }
+    },
     computed: {
       userboards() {
         return this.$root.$data.store.state.userBoards
@@ -96,9 +112,13 @@
       },
       addBoard: function () {
         this.$root.$data.store.actions.createBoard({
-          name: 'This is a test board',
-          description: 'this is a description'
+          name: this.boardName,
+          description: this.boardDesc
         })
+        this.showBoardForm = false
+      },
+      triggerBoardForm: function(){
+        this.showBoardForm = !this.showBoardForm
       }
     }
   }
