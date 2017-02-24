@@ -54,25 +54,43 @@
     </div>-->
 
     <div>
-      <h3>Boards</h3>
-      <button @click="addBoard">Add Board</button>
-      <div class="row">
-        <div v-for="board in boards" class="col s12 m3">
-          <div class="card hoverable blue-grey darken-1">
-            <router-link :to="'/boards/' + board._id" @click="getBoard(board._id)">
-              <div class="card-content white-text">
-                <span class="card-title">{{ board.name }}</span>
-                <p>{{ board.description }}</p>
+      <div class="parallax-container">
+        <div class="parallax"><img src="../assets/images/officesupplies.jpg"></div>
+
+        <h3 class="center-aligned white-text">Boards</h3>
+        <button @click="addBoard">Add Board</button>
+        <div class="row container">
+          <div v-for="board in boards" class="col s12 m3">
+            <div class="card hoverable blue-grey darken-1">
+              <router-link :to="'/boards/' + board._id" @click="getBoard(board._id)">
+                <div class="card-content white-text">
+                  <span class="card-title">{{ board.name }}</span>
+                  <p>{{ board.description }}</p>
+                </div>
+              </router-link>
+              <div class="card-action right-align">
+                <a><i @click="deleteBoard(board)" class="fa fa-recycle"></i></a>
               </div>
-            </router-link>
-            <div class="card-action right-align">
-              <a><i @click="deleteBoard(board)" class="fa fa-recycle"></i></a>
             </div>
           </div>
         </div>
       </div>
+      <div class="section white">
+        <div class="row container">
+          <h3 class="header">Learn Kanban</h3>
+          <p class="grey-text text-darken-3 lighten-3"></p>
+        </div>
+      </div>
+    </div>
+    <div class="parallax-container">
+      <div class="parallax">
+        <img src="../assets/images/typewriter.jpg">
+      </div>
+
+
 
     </div>
+  </div>
 
 
 </template>
@@ -124,10 +142,15 @@
       }
     }
   }
+  $(document).ready(function () {
+    $('.parallax').parallax();
+  });
 
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .parallax-container {
+    height: 400px;
+  }
 </style>

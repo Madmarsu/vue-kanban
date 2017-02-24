@@ -1,7 +1,7 @@
 <template>
     <nav class="blue darken-4" role="navigation">
         <div class="nav-wrapper">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <a id="logo-container" href="#" class="brand-logo center"><img src="../assets/images/kanban-concept.jpg" style="height: 60px; vertical-align: middle; margin-top: -7px;"> Kanban Manager</a>
             <ul v-if="!user._id" class="right hide-on-med-and-down">
                 <li>
                     <router-link to="/login">Login</router-link>
