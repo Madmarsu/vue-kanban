@@ -5,16 +5,16 @@
     <div v-if="!this.$root.$data.store.state.user._id">
       <div class="parallax-container">
         <div class="parallax"><img src="../assets/images/officesupplies.jpg"></div>
-        <div class="parallax-container">
-          <div class="parallax">
-            <img src="../assets/images/typewriter.jpg">
-          </div>
+      </div>
+      <div class="section white">
+        <div class="row container">
+          <h3 class="header">Learn Kanban</h3>
+          <p class="grey-text text-darken-3 lighten-3"></p>
         </div>
-        <div class="section white">
-          <div class="row container">
-            <h3 class="header">Learn Kanban</h3>
-            <p class="grey-text text-darken-3 lighten-3"></p>
-          </div>
+      </div>
+      <div class="parallax-container">
+        <div class="parallax">
+          <img src="../assets/images/typewriter.jpg">
         </div>
       </div>
     </div>
@@ -33,8 +33,8 @@
           </router-link>
         </div>
       </div>
-    <!-- USER AND SHARED BOARDS -->
-    <h3>Shared Boards</h3>
+      <!-- USER AND SHARED BOARDS -->
+      <h3>Shared Boards</h3>
       <div class="row">
         <div v-for="sharedboard in sharedBoards" class="col s12 m3">
           <router-link :to="'/boards/' + sharedboard._id" @click="getBoard(sharedboard._id)">
@@ -83,7 +83,7 @@
       userboards() {
         return this.$root.$data.store.state.userBoards
       },
-      sharedBoards(){
+      sharedBoards() {
         return this.$root.$data.store.state.sharedBoards
       }
     },
