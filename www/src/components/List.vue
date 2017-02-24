@@ -11,6 +11,28 @@
                         </div>
                     </div>
                 </div>
+                <div v-if="showTaskForm" class="card-action white-text">
+                    <h4>Add a Task</h4>
+                    <form class="row" @submit.prevent="addTask">
+                        <div class="col s12 input-field">
+                            <input type="text" id="taskName" v-model="taskName" required>
+                            <label for="taskName">Title</label>
+                        </div>
+                        <div class="col s12 input-field">
+                            <textarea class="materialize-textarea" id="taskDesc" cols="30" rows="10" v-model="taskDesc"></textarea>
+                            <label for="taskDesc">Description</label>
+                        </div>
+                        <button class="waves-effect waves-teal btn" type="submit">Add Task</button>
+                    </form>
+
+                </div>
+                <div class="card-action right-align">
+                    <button @click="triggerTaskForm" class="waves-effect waves-teal btn">
+                        <span v-if="!showTaskForm">Add Task</span>
+                        <span v-if="showTaskForm"><i class="fa fa-close"></i></span>
+                    </button>
+                    <a><i @click="deleteList(list)" class="fa fa-recycle"></i></a>
+                </div>
             </div>
         </div>
 
@@ -29,21 +51,30 @@
         props: ['list', 'tasks'],
         data() {
             return {
-
+                taskName: '',
+                taskDesc: '',
+                showTaskForm: false
             }
         },
         methods: {
-            getLists: function () {
-
+            deleteList(list) {
+                this.$root.$data.store.actions.removeList(list, this.$route.params.id)
             },
-            createList: function () {
-
+            triggerTaskForm() {
+                this.showTaskForm = !this.showTaskForm
+                this.taskName = ''
+                this.taskDesc = ''
             },
-            modifyList: function () {
-
-            },
-            recycleList: function () {
-
+            addTask: function () {
+                this.$root.$data.store.actions.createTask({
+                    name: this.taskName,
+                    description: this.taskDesc,
+                    boardId: this.$route.params.id,
+                    listId: this.list._id
+                }, this.$route.params.id)
+                this.showTaskForm = false
+                this.taskName = ''
+                this.taskDesc = ''
             }
         },
 

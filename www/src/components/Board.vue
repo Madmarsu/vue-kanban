@@ -75,6 +75,8 @@
             },
             triggerListForm: function(){
                 this.showListForm = !this.showListForm
+                this.listName = ''
+                this.listDesc = ''
             }
         }
     }

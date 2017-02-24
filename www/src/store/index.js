@@ -2,7 +2,7 @@ import axios from 'axios'
 
 let api = axios.create({
     baseURL: 'http://192.168.0.6:3001/api/',
-    timeout: 2000,
+    timeout: 3000,
     withCredentials: true
 })
 
@@ -86,10 +86,24 @@ export default {
                 })
                 .catch(handleError)
         },
-        createList(list, id){
+        createList(list, boardId){
             api.post('lists', list)
                 .then(res => {
-                    this.getTasksandLists(id)
+                    this.getTasksandLists(boardId)
+                })
+                .catch(handleError)
+        },
+        removeList(list, boardId){
+            api.delete('lists/' + list._id)
+                .then(res => {
+                    this.getTasksandLists(boardId)
+                })
+                .catch(handleError)
+        },
+        createTask(task, boardId){
+            api.post('tasks', task)
+                .then(res => {
+                    this.getTasksandLists(boardId)
                 })
                 .catch(handleError)
         },
