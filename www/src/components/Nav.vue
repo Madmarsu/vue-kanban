@@ -2,6 +2,7 @@
     <nav class="blue darken-4" role="navigation">
         <div class="nav-wrapper">
             <a id="logo-container" href="#" class="brand-logo center"><img src="../assets/images/kanban-concept.jpg" style="height: 60px; vertical-align: middle; margin-top: -7px;"> Kanban Manager</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="fa fa-bars"></i></a>
             <ul v-if="!user._id" class="right hide-on-med-and-down">
                 <li>
                     <router-link to="/login">Login</router-link>
@@ -18,8 +19,7 @@
                     <a @click="logout">Logout</a>
                 </li>
             </ul>
-
-            <ul id="nav-mobile" class="side-nav">
+            <ul id="mobile-demo" class="side-nav">
                 <li>
                     <router-link to="/login">Login</router-link>
                 </li>
@@ -27,7 +27,7 @@
                     <router-link to="/register">Register</router-link>
                 </li>
             </ul>
-            <!--<ul v-if="this.$root.user._id" id="nav-mobile" class="side-nav">
+            <!--<ul v-if="user._id" id="mobile-demo" class="side-nav">
             <li>
                 Welcome, {{ this.$root.user.name }}!
             </li>
@@ -35,7 +35,6 @@
                 Logout
             </li>
         </ul>-->
-            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
     </nav>
 
@@ -62,6 +61,9 @@
 
     }
 
+$(document).ready(function(){
+    $(".button-collapse").sideNav();
+})
 </script>
 
 

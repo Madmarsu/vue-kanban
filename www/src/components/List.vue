@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="col s3">
+        <div droppable="true" v-on:drop.capture="dropTask" ondragover="event.preventDefault()" class="col s3">
             <div class="card blue-grey darken-1">
                 <div class="card-content white-text">
                     <span class="card-title">{{ list.name }}</span>
@@ -75,6 +75,10 @@
                 this.showTaskForm = false
                 this.taskName = ''
                 this.taskDesc = ''
+            },
+            dropTask(event){
+                let task = JSON.parse(event.dataTransfer.getData('text/javascript'))
+                this.$root.$data.store.actions.droppedTask(task, this.list._id, this.$route.params.id)
             }
         },
 

@@ -124,6 +124,14 @@ export default {
                 })
                 .catch(handleError)
         },
+        droppedTask(task, newListId, boardId){
+            api.put('tasks/' + task._id, { listId: newListId })
+                .then(res => {
+                    console.log(res.data)
+                    this.getTasksandLists(boardId)
+                })
+                .catch(handleError)
+        },
         login(userEmail, userPassword){
             api.post('http://192.168.0.6:3001/login', {
                 email: userEmail,
