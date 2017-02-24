@@ -4,19 +4,22 @@
     <!-- LANDING PAGE -->
     <div v-if="!this.$root.$data.store.state.user._id">
       <div class="parallax-container">
-        <div class="parallax"><img src="../assets/images/officesupplies.jpg"></div>
+        <div class="parallax"></div>
       </div>
       <div class="section white">
         <div class="row container">
           <h3 class="header">Learn Kanban</h3>
           <p class="grey-text text-darken-3 lighten-3"></p>
         </div>
+        <div class="parallax-container">
+        <div class="bgimg-2"></div>
       </div>
-      <div class="parallax-container">
+      </div>
+      <!--<div class="parallax-container">
         <div class="parallax">
           <img src="../assets/images/typewriter.jpg">
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div v-if="this.$root.$data.store.state.user._id">
@@ -133,4 +136,22 @@
   .parallax-container {
     height: 400px;
   }
+  .parallax {
+    /* The image used */
+    background-image: url("../assets/images/typewriter.jpg");
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .bgimg-2 {
+  background-image: url("../assets/images/background1.jpg");
+  min-height: 400px;
+}
+
 </style>
