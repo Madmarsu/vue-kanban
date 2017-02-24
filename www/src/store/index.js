@@ -86,6 +86,13 @@ export default {
                 })
                 .catch(handleError)
         },
+        createList(list, id){
+            api.post('lists', list)
+                .then(res => {
+                    this.getTasksandLists(id)
+                })
+                .catch(handleError)
+        },
         login(userEmail, userPassword){
             api.post('http://192.168.0.6:3001/login', {
                 email: userEmail,

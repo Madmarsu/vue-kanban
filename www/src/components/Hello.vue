@@ -19,41 +19,54 @@
       </div>
     </div>
 
+    <!-- USER AND SHARED BOARDS WHEN LOGGED IN -->
     <div v-if="this.$root.$data.store.state.user._id">
       <h3>Your Boards</h3>
+
       <button v-if="!showBoardForm" @click="triggerBoardForm" class="waves-effect waves-light btn">Add Board</button>
-      <div v-if="showBoardForm">
-          <h4>Add a Board</h4>
-          <form @submit.prevent="addBoard">
-            <input type="text" v-model="boardName">
-            <textarea cols="30" rows="10" v-model="boardDesc"></textarea>
-            <button type="submit">Add Board</button>
-          </form>
+      <div class="container" v-if="showBoardForm">
+        <h5>Add a Board </h5>
+        <form class="row" @submit.prevent="addBoard">
+          <div class="col s12 input-field">
+            <input type="text" id="boardName" v-model="boardName" required>
+            <label for="boardName">Title</label>
+          </div>
+          <div class="col s12 input-field">
+            <textarea class="materialize-textarea" id="boardDesc" cols="30" rows="10" v-model="boardDesc"></textarea>
+            <label for="boardDesc">Description</label>
+          </div>
+          <button class="waves-effect waves-teal btn" type="submit">Add Board</button>
+          <button @click="triggerBoardForm" class="waves-effect waves-teal btn-flat"><i class="fa fa-times"></i></button>
+        </form>
       </div>
+
       <div class="row">
         <div v-for="userboard in userboards" class="col s12 m3">
-          <router-link :to="'/boards/' + userboard._id" @click="getBoard(userboard._id)">
-            <div class="card hoverable blue-grey darken-1">
+          <div class="card hoverable blue-grey darken-1">
+            <router-link :to="'/boards/' + userboard._id" @click="getBoard(userboard._id)">
               <div class="card-content white-text">
                 <span class="card-title">{{ userboard.name }}</span>
                 <p>{{ userboard.description }}</p>
               </div>
+            </router-link>
+            <div class="card-action right-align">
+              <a><i @click="deleteBoard(userboard)" class="fa fa-recycle"></i></a>
             </div>
-          </router-link>
+          </div>
         </div>
       </div>
       <!-- USER AND SHARED BOARDS -->
       <h3>Shared Boards</h3>
       <div class="row">
         <div v-for="sharedboard in sharedBoards" class="col s12 m3">
-          <router-link :to="'/boards/' + sharedboard._id" @click="getBoard(sharedboard._id)">
-            <div class="card hoverable blue-grey darken-1">
+          <div class="card hoverable blue-grey darken-1">
+            <router-link :to="'/boards/' + sharedboard._id" @click="getBoard(sharedboard._id)">
               <div class="card-content white-text">
                 <span class="card-title">{{ sharedboard.name }}</span>
                 <p>{{ sharedboard.description }}</p>
               </div>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
@@ -88,7 +101,7 @@
 <script>
   export default {
     name: 'hello',
-    data(){
+    data() {
       return {
         boardName: '',
         boardDesc: '',
@@ -116,8 +129,10 @@
           description: this.boardDesc
         })
         this.showBoardForm = false
+        this.boardName = ''
+        this.boardDesc = ''
       },
-      triggerBoardForm: function(){
+      triggerBoardForm: function () {
         this.showBoardForm = !this.showBoardForm
       }
     }
