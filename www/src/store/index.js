@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let api = axios.create({
-    baseURL: 'http://localhost:3001/api/',
+    baseURL: 'http://192.168.0.6:3001/api/',
     timeout: 2000,
     withCredentials: true
 })
@@ -20,7 +20,7 @@ let state = {
 }
 
 // HARDCODE LOGIN FOR TESTING PURPOSES
-// api.post('http://localhost:3001/login', {
+// api.post('http://192.168.0.6:3001/login', {
 //     email: 'jaime@jaime.com',
 //     password: 'sandbox'
 // }).then(res=>{
@@ -86,7 +86,7 @@ export default {
                 .catch(handleError)
         },
         login(userEmail, userPassword){
-            api.post('http://localhost:3001/login', {
+            api.post('http://192.168.0.6:3001/login', {
                 email: userEmail,
                 password: userPassword
             })
@@ -104,7 +104,7 @@ export default {
                 .catch(handleError)
         },
         register(email, name, password){
-            api.post('http://localhost:3001/register', {
+            api.post('http://192.168.0.6:3001/register', {
                 email: email,
                 name: name,
                 password: password
@@ -115,7 +115,7 @@ export default {
                 .catch(handleError)
         },
         logout(){
-            api.delete('http://localhost:3001/logout')
+            api.delete('http://192.168.0.6:3001/logout')
                 .then(res => {
                     state.user = '';
                     Materialize.toast(res.data.message, 2000);
