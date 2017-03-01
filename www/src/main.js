@@ -8,11 +8,11 @@ import store from './store'
 
 
 
-let socket = io('http://localhost:3001')
-socket.on('CONNECTED', function(data){
-  console.log(data)
-  socket.emit('update', {data: 'blarg', boardId: '451436'})
-})
+// let socket = io('http://localhost:3001')
+// socket.on('CONNECTED', function(data){
+//   console.log(data)
+//   socket.emit('update', {data: 'blarg', boardId: '451436'})
+// })
 
 /* eslint-disable no-new */
 new Vue({

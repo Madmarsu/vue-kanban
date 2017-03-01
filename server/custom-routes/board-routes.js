@@ -54,26 +54,21 @@ export default {
     reqType: 'post',
     method(req, res, next) {
       let action = 'Invite a User to Collaborate'
-      let foundUser
+      console.log(req.body)
+      console.log(req.body.email)
       Users.findOne({ email: req.body.email })
         .then(user => {
-          foundUser = user
-          return Boards.findById(req.params.id)
-        })
-        .then(board => {
-          board._doc.collaborators.push(foundUser._doc._id)
-          try {
-            return board.save()
-          }
-          catch(err) {
-            return board.save()
-          }
-        })
-        .then((board) => {
-          res.send(handleResponse(action, board))
+          Boards.findById(req.params.id)
+            .then(board => {
+              board.collaborators.push(user._id)
+              board.save()
+                .then((board) => {
+                  res.send(handleResponse(action, board))
+                })
+            })
         })
         .catch(error => {
-          res.send(handleResponse(action, null, error))
+          return next(handleResponse(action, null, error))
         })
     }
   }
