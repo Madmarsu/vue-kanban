@@ -26,6 +26,7 @@
                 </form>
             </div>
         </div>
+    </div>
 
 </template>
 
@@ -52,7 +53,7 @@
                 this.$root.$data.store.actions.login(this.email, this.password);
                 this.email = '';
                 this.password = '';
-                this.$router.push({path: '/'})
+                this.$router.push({ path: '/' })
             },
             toggleShowPass: function () {
                 this.showPass = !this.showPass

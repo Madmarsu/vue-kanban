@@ -22,7 +22,7 @@
             <p>Because we use a recycle icon rather than a trash can, we are more Earth-friendly and reduce the carbon footprint.</p>
           </div>
           <hr>
-          <h5>Kanban (看板)<h5>
+          <h5>Kanban (看板)</h5>
           <p class="grey-text text-darken-3 lighten-3">Based on a Japanese principle to keep a production system running as a whole, kanban is truly the ultimate when it comes to queue limitation and dividing up tasks from the whole project. Break things down to watch them build back up into a fully functional product.</p>
         </div>
       </div>
